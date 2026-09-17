@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IELTS Listening Practice — BUYE-Online</title>
+<link rel="icon" href="../assets/buye-mark-64.png">
+<link rel="stylesheet" href="../shared/theme.css">
+<style>
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:Arial, "Helvetica Neue", Helvetica, sans-serif; }
+  header{ background:var(--header); border-bottom:1px solid var(--header-line); color:#fff; padding:14px 24px; }
+  header .inner{ max-width:900px; margin:0 auto; display:flex; align-items:center; gap:10px; }
+  header .brand-text{ line-height:1.15; }
+  header strong{ font-size:14px; display:block; }
+  header span{ display:block; font-size:11px; color:#9FA9BC; }
+  header .spacer{ flex:1; }
+  main{ max-width:900px; margin:0 auto; padding:32px 24px 60px; }
+  h1{ font-size:22px; margin:0 0 6px; }
+  p.lead{ color:var(--ink-soft); font-size:14px; margin:0 0 28px; }
+  .grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(220px,1fr)); gap:16px; }
+  .card{ background:var(--panel); border:1px solid var(--line); border-radius:4px; padding:18px 18px 16px; text-decoration:none; color:var(--ink); display:block; position:relative; }
+  .card:hover{ border-color:var(--blue); }
+  .card.locked{ opacity:.85; }
+  .card .badge{ font-size:11px; color:var(--ink-soft); margin-bottom:6px; }
+  .card h3{ font-size:15px; margin:0 0 8px; }
+  .card .meta{ font-size:12px; color:var(--ink-soft); }
+  .card .go{ margin-top:12px; font-size:12.5px; font-weight:bold; color:var(--blue); }
+  .card .lock-note{ margin-top:12px; font-size:12.5px; font-weight:bold; color:var(--amber); }
+  .placeholder{ border-style:dashed; color:var(--ink-soft); display:flex; align-items:center; justify-content:center; min-height:110px; font-size:13px; text-align:center; }
+  .lock-chip{ position:absolute; top:14px; right:14px; font-size:10.5px; background:var(--amber); color:#fff; padding:2px 8px; border-radius:10px; }
+  .auth-gate-card{ background:var(--panel); border:1px solid var(--line); border-radius:4px; padding:22px; max-width:380px; }
+  .state-msg{ font-size:13px; color:var(--ink-soft); }
+</style>
+</head>
+<body>
+<header>
+  <div class="inner">
+    <span class="brand-mark"><img src="../assets/buye-mark-160.png" alt="" style="width:26px;height:26px;"></span>
+    <div class="brand-text"><strong>BUYE-Online</strong><span>IELTS Listening Practice</span></div>
+    <div class="spacer"></div>
+    <button class="theme-toggle-btn" id="theme-toggle" aria-label="Switch to dark mode">&#9789;</button>
+  </div>
+</header>
+<main>
+  <h1>Choose a listening test</h1>
+  <p class="lead">Full-length, computer-delivered-style practice tests: one continuous recording, four parts, forty questions, timed.</p>
+  <div id="content-slot">
+    <p class="state-msg">Loading…</p>
+  </div>
+</main>
+<script src="../shared/theme-toggle.js"></script>
+<script src="../shared/api.js"></script>
+<script src="../shared/auth-gate.js"></script>
+<script>
+(function () {
+  "use strict";
+  var slot = document.getElementById('content-slot');
+
+  BuyeAuthGate.require(slot, {
+    subtitle: 'Log in to see which tests are unlocked for your account.',
+    onReady: function (token) {
+      loadCatalogue(token);
+    }
+  });
+
+  function loadCatalogue(token) {
+    slot.innerHTML = '<p class="state-msg">Loading tests…</p>';
+    BuyeApi.getTestCatalogue(token).then(function (r) {
+      if (!r.success) {
+        // Session likely expired — drop back into the login form.
+        BuyeAuthGate.require(slot, {
+          subtitle: r.message || 'Please log in again.',
+          onReady: loadCatalogue
+        });
+        return;
+      }
+      render(r.tests, r.upgradeUrl);
+    });
+  }
+
+  function render(tests, upgradeUrl) {
+    if (!tests.length) {
+      slot.innerHTML = '<div class="grid"><div class="card placeholder">No tests published yet.</div></div>';
+      return;
+    }
+    var grid = document.createElement('div');
+    grid.className = 'grid';
+    tests.forEach(function (t) {
+      var card = document.createElement(t.unlocked ? 'a' : 'div');
+      card.className = 'card' + (t.unlocked ? '' : ' locked');
+      if (t.unlocked) {
+        card.href = BuyeApi.linkWithToken(
+          '../engines/' + t.module + '/tests/' + t.testId + '/index.html'
+        );
+      }
+      var lockChip = t.accessTier === 'premium' ? '<span class="lock-chip">' + (t.unlocked ? 'Premium' : 'Locked') + '</span>' : '';
+      var actionHtml = t.unlocked
+        ? '<div class="go">Start test &rarr;</div>'
+        : '<div class="lock-note">Unlock with a subscription &rarr;</div>';
+      card.innerHTML =
+        lockChip +
+        '<div class="badge">' + esc(t.module.toUpperCase()) + '</div>' +
+        '<h3>' + esc(t.title) + '</h3>' +
+        '<div class="meta">' + esc(t.questionCount) + ' questions</div>' +
+        actionHtml;
+      if (!t.unlocked) {
+        card.addEventListener('click', function () {
+          window.location.href = upgradeUrl;
+        });
+        card.style.cursor = 'pointer';
+      }
+      grid.appendChild(card);
+    });
+    slot.innerHTML = '';
+    slot.appendChild(grid);
+  }
+
+  function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+})();
+</script>
+</body>
+</html>

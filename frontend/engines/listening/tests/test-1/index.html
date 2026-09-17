@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>IELTS Listening — Computer-Delivered Test 1</title>
+<link rel="icon" href="../../../../assets/buye-mark-64.png">
+<link rel="stylesheet" href="../../engine/exam-theme.css">
+
+</head>
+<body>
+
+<!-- ===================== AUTH GATE ===================== -->
+<div id="auth-screen" class="hidden"></div>
+
+<!-- ===================== SOUND CHECK ===================== -->
+<div id="sc-screen" class="hidden">
+  <div class="sc-card">
+    <div class="sc-brand"><span class="brand-mark"><img src="../../../../assets/buye-mark-160.png" alt="" style="width:22px;height:22px;"></span><span>BUYE-ONLINE · COMPUTER-DELIVERED IELTS PRACTICE</span></div>
+    <h1>Listening test — sound check</h1>
+    <p class="sub">Before you begin, confirm your headphones are working. Once the test starts, the recording plays once and cannot be paused, rewound or replayed — exactly like the real computer-delivered test.</p>
+
+    <div class="sc-row">
+      <span class="lab">Volume</span>
+      <div class="sc-vol">
+        <input type="range" id="sc-vol" min="0" max="1" step="0.05" value="0.8">
+        <button class="sc-test-btn" id="sc-test-btn">Play test sound</button>
+      </div>
+    </div>
+
+    <div class="sc-row">
+      <label class="sc-confirm">
+        <input type="checkbox" id="sc-confirm">
+        I can hear the test sound clearly through my headphones.
+      </label>
+    </div>
+
+    <p class="sc-err" id="sc-err">Confirm you can hear the test sound before starting.</p>
+    <p id="sc-lock-msg"></p>
+
+    <div class="sc-actions">
+      <button class="btn-start" id="sc-start-btn">Start test</button>
+      <span class="sc-note">30 minutes · 4 parts · 40 questions</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== TEST SCREEN ===================== -->
+<div id="test-screen" class="hidden">
+  <header class="exam-bar">
+    <div class="exam-bar-inner">
+      <span class="brand-mark"><img class="logo" src="../../../../assets/buye-mark-160.png" alt=""></span>
+      <div>
+        <div class="title">IELTS Listening — Test 1</div>
+        <div class="who">Candidate practice session</div>
+      </div>
+      <div class="spacer"></div>
+      <div class="part-tag" id="part-tag">Part 1 of 4</div>
+      <div class="time-wrap" id="time-wrap">
+        <span class="lab">Time left</span>
+        <span class="val" id="timer">30:00</span>
+      </div>
+      <button class="theme-toggle-btn" id="theme-toggle" aria-label="Switch to dark mode">&#9789;</button>
+    </div>
+  </header>
+
+  <div class="part-tabs">
+    <div class="part-tabs-inner" id="part-tabs"></div>
+  </div>
+
+  <div class="body-wrap">
+    <main class="exam-main">
+
+      <!-- PART 1 -->
+      <section class="part-panel" data-part="1">
+        <div class="instr-box"><span class="pt">Questions 1–10</span>Complete the tables below. Write ONE WORD OR A NUMBER for each answer.</div>
+        <h2 class="q-title">Holiday apartments</h2>
+
+        <table class="qtable">
+          <thead><tr><th>Apartments</th><th>Facilities</th><th>Other information</th><th>Cost</th></tr></thead>
+          <tbody>
+            <tr><td>Rose Garden Apartments</td><td>Studio flat</td><td>Entertainment programme: Greek dancing</td><td>£219</td></tr>
+            <tr><td>Blue Bay Apartments</td><td>Large salt water swimming pool</td><td>Just <span class="blank-wrap"><span class="qn-badge" id="badge-1">1</span><input class="ans" data-q="1" type="text"><button class="flag-btn" data-flag="1" aria-label="Flag question 1">&#9873;</button></span> metres from beach — near shops</td><td>£275</td></tr>
+            <tr><td><span class="blank-wrap"><span class="qn-badge" id="badge-2">2</span><input class="ans" data-q="2" type="text"><button class="flag-btn" data-flag="2" aria-label="Flag question 2">&#9873;</button></span> Apartments</td><td>Terrace</td><td>Watersports</td><td>£490</td></tr>
+            <tr><td>The Grand</td><td>Greek paintings and <span class="blank-wrap"><span class="qn-badge" id="badge-3">3</span><input class="ans" data-q="3" type="text"><button class="flag-btn" data-flag="3" aria-label="Flag question 3">&#9873;</button></span></td><td>Overlooking <span class="blank-wrap"><span class="qn-badge" id="badge-4">4</span><input class="ans" data-q="4" type="text"><button class="flag-btn" data-flag="4" aria-label="Flag question 4">&#9873;</button></span> — near a supermarket and a disco</td><td>£<span class="blank-wrap"><span class="qn-badge" id="badge-5">5</span><input class="ans" data-q="5" type="text"><button class="flag-btn" data-flag="5" aria-label="Flag question 5">&#9873;</button></span></td></tr>
+          </tbody>
+        </table>
+
+        <h2 class="q-title">Greek Island Holidays — insurance benefits</h2>
+        <table class="qtable">
+          <thead><tr><th>Insurance benefit</th><th>Maximum amount</th></tr></thead>
+          <tbody>
+            <tr><td>Cancellation</td><td>£<span class="blank-wrap"><span class="qn-badge" id="badge-6">6</span><input class="ans" data-q="6" type="text"><button class="flag-btn" data-flag="6" aria-label="Flag question 6">&#9873;</button></span></td></tr>
+            <tr><td>Hospital</td><td>£600 additional benefit allows a <span class="blank-wrap"><span class="qn-badge" id="badge-7">7</span><input class="ans" data-q="7" type="text"><button class="flag-btn" data-flag="7" aria-label="Flag question 7">&#9873;</button></span> to travel to resort</td></tr>
+            <tr><td><span class="blank-wrap"><span class="qn-badge" id="badge-8">8</span><input class="ans" data-q="8" type="text"><button class="flag-btn" data-flag="8" aria-label="Flag question 8">&#9873;</button></span> departure</td><td>Up to £1000, depends on reason</td></tr>
+            <tr><td>Personal belongings</td><td>Up to £3000; £500 for one <span class="blank-wrap"><span class="qn-badge" id="badge-9">9</span><input class="ans" data-q="9" type="text"><button class="flag-btn" data-flag="9" aria-label="Flag question 9">&#9873;</button></span></td></tr>
+            <tr><td>Assistant manager</td><td>Name: Ben <span class="blank-wrap"><span class="qn-badge" id="badge-10">10</span><input class="ans" data-q="10" type="text"><button class="flag-btn" data-flag="10" aria-label="Flag question 10">&#9873;</button></span></td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- PART 2 -->
+      <section class="part-panel" data-part="2">
+        <div class="instr-box"><span class="pt">Questions 11–13</span>Choose the correct letter, A, B or C.</div>
+        <h2 class="q-title">Winridge Forest Railway Park</h2>
+
+        <div class="mcq-block">
+          <div class="stem-row"><span class="qn-badge" id="badge-11">11</span><p>Simon's idea for a theme park came from</p><button class="flag-btn" data-flag="11" aria-label="Flag question 11">&#9873;</button></div>
+          <label class="mcq-opt" data-q="11"><input type="radio" name="q11" value="A"> his childhood hobby</label>
+          <label class="mcq-opt" data-q="11"><input type="radio" name="q11" value="B"> his interest in landscape design</label>
+          <label class="mcq-opt" data-q="11"><input type="radio" name="q11" value="C"> his visit to another park</label>
+        </div>
+
+        <div class="mcq-block">
+          <div class="stem-row"><span class="qn-badge" id="badge-12">12</span><p>When they started, the family decided to open the park only when</p><button class="flag-btn" data-flag="12" aria-label="Flag question 12">&#9873;</button></div>
+          <label class="mcq-opt" data-q="12"><input type="radio" name="q12" value="A"> the weather was expected to be good</label>
+          <label class="mcq-opt" data-q="12"><input type="radio" name="q12" value="B"> the children weren't at school</label>
+          <label class="mcq-opt" data-q="12"><input type="radio" name="q12" value="C"> there were fewer farming commitments</label>
+        </div>
+
+        <div class="mcq-block">
+          <div class="stem-row"><span class="qn-badge" id="badge-13">13</span><p>Since opening, the park has had</p><button class="flag-btn" data-flag="13" aria-label="Flag question 13">&#9873;</button></div>
+          <label class="mcq-opt" data-q="13"><input type="radio" name="q13" value="A"> 50,000 visitors</label>
+          <label class="mcq-opt" data-q="13"><input type="radio" name="q13" value="B"> 1,000,000 visitors</label>
+          <label class="mcq-opt" data-q="13"><input type="radio" name="q13" value="C"> 1,500,000 visitors</label>
+        </div>
+
+        <div class="instr-box"><span class="pt">Questions 14–18</span>What is currently the main area of work of each person? Choose FIVE answers from the box.</div>
+        <div class="match-key"><b>Area of work</b> &nbsp; A advertising &nbsp; B animal care &nbsp; C building &nbsp; D educational links &nbsp; E engine maintenance &nbsp; F food and drink &nbsp; G sales &nbsp; H staffing</div>
+
+        <div class="match-row"><span class="qn-badge" id="badge-14">14</span><span class="who">Simon</span><select class="ans" data-q="14"><option value="">–</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select><button class="flag-btn" data-flag="14" aria-label="Flag question 14">&#9873;</button></div>
+        <div class="match-row"><span class="qn-badge" id="badge-15">15</span><span class="who">Liz</span><select class="ans" data-q="15"><option value="">–</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select><button class="flag-btn" data-flag="15" aria-label="Flag question 15">&#9873;</button></div>
+        <div class="match-row"><span class="qn-badge" id="badge-16">16</span><span class="who">Sarah</span><select class="ans" data-q="16"><option value="">–</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select><button class="flag-btn" data-flag="16" aria-label="Flag question 16">&#9873;</button></div>
+        <div class="match-row"><span class="qn-badge" id="badge-17">17</span><span class="who">Duncan</span><select class="ans" data-q="17"><option value="">–</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select><button class="flag-btn" data-flag="17" aria-label="Flag question 17">&#9873;</button></div>
+        <div class="match-row"><span class="qn-badge" id="badge-18">18</span><span class="who">Judith</span><select class="ans" data-q="18"><option value="">–</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select><button class="flag-btn" data-flag="18" aria-label="Flag question 18">&#9873;</button></div>
+
+        <div class="instr-box" style="margin-top:18px;"><span class="pt">Questions 19–20</span>Complete the table below. Write ONE WORD OR A NUMBER.</div>
+        <table class="qtable">
+          <thead><tr><th>Feature</th><th>Size</th><th>Biggest challenge</th><th>Target age group</th></tr></thead>
+          <tbody>
+            <tr><td>Railway</td><td>1.2 km</td><td>Making tunnels</td><td>—</td></tr>
+            <tr><td>Go-kart arena</td><td><span class="blank-wrap"><span class="qn-badge" id="badge-19">19</span><input class="ans" data-q="19" type="text"><button class="flag-btn" data-flag="19" aria-label="Flag question 19">&#9873;</button></span> sq m</td><td>Removing mounds on track</td><td><span class="blank-wrap"><span class="qn-badge" id="badge-20">20</span><input class="ans" data-q="20" type="text"><button class="flag-btn" data-flag="20" aria-label="Flag question 20">&#9873;</button></span> year olds</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- PART 3 -->
+      <section class="part-panel" data-part="3">
+        <div class="instr-box"><span class="pt">Questions 21–30</span>Complete the notes below. Write NO MORE THAN TWO WORDS OR A NUMBER.</div>
+        <h2 class="q-title">Study skills tutorial — Caroline Benning</h2>
+
+        <div class="notes-block">
+          Dissertation topic: the <span class="blank-wrap"><span class="qn-badge" id="badge-21">21</span><input class="ans" data-q="21" type="text"><button class="flag-btn" data-flag="21" aria-label="Flag question 21">&#9873;</button></span><br>
+          Strengths: <span class="blank-wrap"><span class="qn-badge" id="badge-22">22</span><input class="ans" data-q="22" type="text"><button class="flag-btn" data-flag="22" aria-label="Flag question 22">&#9873;</button></span>; computer modelling<br>
+          Weaknesses: lack of background information; poor <span class="blank-wrap"><span class="qn-badge" id="badge-23">23</span><input class="ans" data-q="23" type="text"><button class="flag-btn" data-flag="23" aria-label="Flag question 23">&#9873;</button></span> skills
+        </div>
+
+        <table class="qtable" style="margin-top:14px;">
+          <thead><tr><th>Possible strategy</th><th>Benefits</th><th>Problems</th></tr></thead>
+          <tbody>
+            <tr><td>Peer group discussion</td><td>Increase <span class="blank-wrap"><span class="qn-badge" id="badge-24">24</span><input class="ans" data-q="24" type="text"><button class="flag-btn" data-flag="24" aria-label="Flag question 24">&#9873;</button></span></td><td>Dissertations tend to contain the same <span class="blank-wrap"><span class="qn-badge" id="badge-25">25</span><input class="ans" data-q="25" type="text"><button class="flag-btn" data-flag="25" aria-label="Flag question 25">&#9873;</button></span></td></tr>
+            <tr><td>Use the <span class="blank-wrap"><span class="qn-badge" id="badge-26">26</span><input class="ans" data-q="26" type="text"><button class="flag-btn" data-flag="26" aria-label="Flag question 26">&#9873;</button></span> service</td><td>Provides structured programme</td><td>Limited <span class="blank-wrap"><span class="qn-badge" id="badge-27">27</span><input class="ans" data-q="27" type="text"><button class="flag-btn" data-flag="27" aria-label="Flag question 27">&#9873;</button></span></td></tr>
+            <tr><td>Consult study skill books</td><td>Are a good source of reference</td><td>Can be too <span class="blank-wrap"><span class="qn-badge" id="badge-28">28</span><input class="ans" data-q="28" type="text"><button class="flag-btn" data-flag="28" aria-label="Flag question 28">&#9873;</button></span></td></tr>
+          </tbody>
+        </table>
+
+        <div class="notes-block" style="margin-top:14px;">
+          Recommendations: use a card index<br>
+          Read all notes <span class="blank-wrap"><span class="qn-badge" id="badge-29">29</span><input class="ans" data-q="29" type="text"><button class="flag-btn" data-flag="29" aria-label="Flag question 29">&#9873;</button></span><br>
+          Next tutorial date: <span class="blank-wrap"><span class="qn-badge" id="badge-30">30</span><input class="ans" data-q="30" type="text"><button class="flag-btn" data-flag="30" aria-label="Flag question 30">&#9873;</button></span> January
+        </div>
+      </section>
+
+      <!-- PART 4 -->
+      <section class="part-panel" data-part="4">
+        <div class="instr-box"><span class="pt">Questions 31–32</span>Choose the correct letter, A, B or C.</div>
+        <h2 class="q-title">The underground house</h2>
+
+        <div class="mcq-block">
+          <div class="stem-row"><span class="qn-badge" id="badge-31">31</span><p>The owners of the underground house</p><button class="flag-btn" data-flag="31" aria-label="Flag question 31">&#9873;</button></div>
+          <label class="mcq-opt" data-q="31"><input type="radio" name="q31" value="A"> had no experience of living in a rural area</label>
+          <label class="mcq-opt" data-q="31"><input type="radio" name="q31" value="B"> were interested in environmental issues</label>
+          <label class="mcq-opt" data-q="31"><input type="radio" name="q31" value="C"> wanted a professional project manager</label>
+        </div>
+
+        <div class="mcq-block">
+          <div class="stem-row"><span class="qn-badge" id="badge-32">32</span><p>What does the speaker say about the site of the house?</p><button class="flag-btn" data-flag="32" aria-label="Flag question 32">&#9873;</button></div>
+          <label class="mcq-opt" data-q="32"><input type="radio" name="q32" value="A"> The land was quite cheap</label>
+          <label class="mcq-opt" data-q="32"><input type="radio" name="q32" value="B"> Stone was being extracted nearby</label>
+          <label class="mcq-opt" data-q="32"><input type="radio" name="q32" value="C"> It was in a completely unspoilt area</label>
+        </div>
+
+        <div class="instr-box"><span class="pt">Questions 33–40</span>Complete the notes below. Write NO MORE THAN TWO WORDS AND/OR A NUMBER.</div>
+        <div class="notes-block">
+          <b>Design</b><br>
+          · Built in the earth, with two floors<br>
+          · South-facing side built of two layers of <span class="blank-wrap"><span class="qn-badge" id="badge-33">33</span><input class="ans" data-q="33" type="text"><button class="flag-btn" data-flag="33" aria-label="Flag question 33">&#9873;</button></span><br>
+          · Photovoltaic tiles were attached<br>
+          · A layer of foam improved the <span class="blank-wrap"><span class="qn-badge" id="badge-34">34</span><input class="ans" data-q="34" type="text"><button class="flag-btn" data-flag="34" aria-label="Flag question 34">&#9873;</button></span> of the building<br><br>
+          <b>Special features</b><br>
+          · More light: internal mirrors and <span class="blank-wrap"><span class="qn-badge" id="badge-35">35</span><input class="ans" data-q="35" type="text"><button class="flag-btn" data-flag="35" aria-label="Flag question 35">&#9873;</button></span><br>
+          · In future, the house may produce more <span class="blank-wrap"><span class="qn-badge" id="badge-36">36</span><input class="ans" data-q="36" type="text"><button class="flag-btn" data-flag="36" aria-label="Flag question 36">&#9873;</button></span> than it needs<br>
+          · Recycled wood was used for the <span class="blank-wrap"><span class="qn-badge" id="badge-37">37</span><input class="ans" data-q="37" type="text"><button class="flag-btn" data-flag="37" aria-label="Flag question 37">&#9873;</button></span> of the house<br>
+          · The system for processing domestic <span class="blank-wrap"><span class="qn-badge" id="badge-38">38</span><input class="ans" data-q="38" type="text"><button class="flag-btn" data-flag="38" aria-label="Flag question 38">&#9873;</button></span> is organic<br><br>
+          <b>Environmental issues</b><br>
+          · Large quantities of <span class="blank-wrap"><span class="qn-badge" id="badge-39">39</span><input class="ans" data-q="39" type="text"><button class="flag-btn" data-flag="39" aria-label="Flag question 39">&#9873;</button></span> in construction were environmentally harmful<br>
+          · The house will have paid its "environmental debt" within <span class="blank-wrap"><span class="qn-badge" id="badge-40">40</span><input class="ans" data-q="40" type="text"><button class="flag-btn" data-flag="40" aria-label="Flag question 40">&#9873;</button></span>
+        </div>
+      </section>
+
+    </main>
+
+    <aside class="palette">
+      <div class="palette-box">
+        <h3>Question palette</h3>
+        <div id="palette-parts"></div>
+        <div class="palette-legend">
+          <div class="li"><span class="sw a"></span> Answered</div>
+          <div class="li"><span class="sw f"></span> Flagged</div>
+        </div>
+        <button class="review-jump" id="palette-review-btn">Go to review</button>
+      </div>
+    </aside>
+  </div>
+
+  <div class="ctrl-bar">
+    <div class="ctrl-inner">
+      <button class="nav-btn" id="prev-part-btn">&larr; Previous part</button>
+      <span class="ctrl-mid" id="ctrl-progress">0 / 40 answered</span>
+      <div style="display:flex; gap:10px;">
+        <button class="nav-btn" id="next-part-btn">Next part &rarr;</button>
+        <button class="btn-review" id="go-review-btn">Review &amp; submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== REVIEW SCREEN ===================== -->
+<div id="review-screen" class="hidden">
+  <div class="review-head">
+    <div class="review-head-inner">
+      <span class="brand-mark"><img src="../../../../assets/buye-mark-64.png" alt="" style="width:20px;height:20px;"></span>
+      <h1>Review your answers</h1>
+    </div>
+  </div>
+  <div class="review-body">
+    <div class="review-summary">
+      <div><div class="n" id="rv-answered">0 / 40</div><div class="l">Answered</div></div>
+      <div><div class="n" id="rv-unanswered">40</div><div class="l">Not answered</div></div>
+      <div><div class="n" id="rv-flagged">0</div><div class="l">Flagged for review</div></div>
+      <div><div class="n" id="rv-time">30:00</div><div class="l">Time remaining</div></div>
+    </div>
+
+    <div class="review-grid-wrap">
+      <h3>All questions — click any number to go back to it</h3>
+      <div class="review-grid" id="review-grid"></div>
+    </div>
+
+    <div class="review-actions">
+      <button class="btn-back" id="review-back-btn">Back to test</button>
+      <button class="btn-submit-final" id="review-submit-btn">Submit test</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== RESULTS SCREEN ===================== -->
+<div id="results-screen" class="hidden">
+  <div class="rw">
+    <div class="brand"><span class="brand-mark"><img src="../../../../assets/buye-mark-160.png" alt="" style="width:22px;height:22px;"></span><span>BUYE-Online — IELTS Listening Test 1 results</span></div>
+
+    <div class="score-hero">
+      <div class="band"><div class="n" id="band-score">–</div><div class="l">ESTIMATED BAND</div></div>
+      <div class="raw"><div class="n" id="raw-score">0 / 40</div><div class="l">correct, converted using the standard IELTS Listening band table</div></div>
+    </div>
+
+    <div class="part-scores" id="part-scores"></div>
+
+    <h3 style="font-size:14px; margin:0 0 10px;">Answer review</h3>
+    <table class="review-table">
+      <thead><tr><th></th><th>Q</th><th>Your answer</th><th>Correct answer</th></tr></thead>
+      <tbody id="review-body"></tbody>
+    </table>
+
+    <div class="results-actions">
+      <button class="btn-primary2" id="retake-btn">Retake test</button>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+  window.TEST_DATA = {
+    testId: "test-1",
+    title: "IELTS Listening — Computer-Delivered Test 1",
+    audioSrc: "audio.mp3",
+    totalQuestions: 40,
+    partBoundaries: [10, 20, 30, 40],
+    partLabels: {
+      1: "Part 1 — Holiday apartments & insurance",
+      2: "Part 2 — Winridge Forest Railway Park",
+      3: "Part 3 — Study skills tutorial",
+      4: "Part 4 — The underground house"
+    }
+  };
+</script>
+<script src="../../../../shared/theme-toggle.js"></script>
+<script src="../../../../shared/api.js"></script>
+<script src="../../../../shared/auth-gate.js"></script>
+<script src="../../engine/exam-engine.js"></script>
+</body>
+</html>

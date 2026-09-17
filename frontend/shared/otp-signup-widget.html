@@ -1,0 +1,53 @@
+<!-- Drop this into any page of ielts.buye.online. Requires api.js loaded first. -->
+<div id="buye-auth-widget" style="max-width:380px;font-family:Arial,Helvetica,sans-serif;">
+  <div id="auth-step-details">
+    <h3 style="margin:0 0 4px;font-size:16px;">Create your account</h3>
+    <p style="margin:0 0 14px;font-size:12.5px;color:#5B6270;">
+      New accounts are reviewed by our team before you can log in.
+    </p>
+    <input id="auth-name" placeholder="Full name" style="width:100%;padding:9px;margin-bottom:8px;border:1px solid #D7DAE0;border-radius:3px;">
+    <input id="auth-email" type="email" placeholder="Email address" style="width:100%;padding:9px;margin-bottom:8px;border:1px solid #D7DAE0;border-radius:3px;">
+    <input id="auth-phone" placeholder="Phone number" style="width:100%;padding:9px;margin-bottom:12px;border:1px solid #D7DAE0;border-radius:3px;">
+    <button id="auth-send-otp" style="background:#1B5FAE;color:#fff;border:none;padding:10px 18px;border-radius:3px;font-weight:bold;cursor:pointer;">Send verification code</button>
+  </div>
+
+  <div id="auth-step-otp" style="display:none;">
+    <h3 style="margin:0 0 4px;font-size:16px;">Enter the code</h3>
+    <p style="margin:0 0 14px;font-size:12.5px;color:#5B6270;">We emailed a 6-digit code — it expires in 5 minutes.</p>
+    <input id="auth-otp" inputmode="numeric" maxlength="6" placeholder="123456" style="width:100%;padding:9px;margin-bottom:12px;border:1px solid #D7DAE0;border-radius:3px;">
+    <button id="auth-verify-otp" style="background:#1B5FAE;color:#fff;border:none;padding:10px 18px;border-radius:3px;font-weight:bold;cursor:pointer;">Verify &amp; create account</button>
+  </div>
+
+  <p id="auth-msg" style="font-size:12.5px;margin-top:12px;"></p>
+</div>
+
+<script>
+(function(){
+  var email = "";
+  var msg = document.getElementById('auth-msg');
+  function show(text, isErr){ msg.textContent = text; msg.style.color = isErr ? '#C0392B' : '#2E7D32'; }
+
+  document.getElementById('auth-send-otp').addEventListener('click', function(){
+    email = document.getElementById('auth-email').value.trim();
+    var name = document.getElementById('auth-name').value.trim();
+    if(!name || !email){ show('Please enter your name and email.', true); return; }
+    show('Sending code…', false);
+    BuyeApi.requestOtp(email, 'signup').then(function(r){
+      show(r.message, !r.success);
+      if(r.success){
+        document.getElementById('auth-step-details').style.display = 'none';
+        document.getElementById('auth-step-otp').style.display = 'block';
+      }
+    });
+  });
+
+  document.getElementById('auth-verify-otp').addEventListener('click', function(){
+    var otp = document.getElementById('auth-otp').value.trim();
+    var name = document.getElementById('auth-name').value.trim();
+    var phone = document.getElementById('auth-phone').value.trim();
+    BuyeApi.verifyOtp(email, otp, 'signup', { name: name, phone: phone }).then(function(r){
+      show(r.message, !r.success);
+    });
+  });
+})();
+</script>

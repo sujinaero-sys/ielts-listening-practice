@@ -1,0 +1,40 @@
+<!-- Drop this into any page of ielts.buye.online (e.g. a "Request a callback" /
+     inquiry section). Requires api.js loaded first. No login required. -->
+<div id="buye-lead-widget" style="max-width:380px;font-family:Arial,Helvetica,sans-serif;">
+  <h3 style="margin:0 0 4px;font-size:16px;">Have a question? Request a callback</h3>
+  <p style="margin:0 0 14px;font-size:12.5px;color:#5B6270;">
+    Or reach us directly: <a id="lead-phone-link" href="#">Call</a> ·
+    <a id="lead-whatsapp-link" href="#" target="_blank">WhatsApp</a>
+  </p>
+  <input id="lead-name" placeholder="Full name" style="width:100%;padding:9px;margin-bottom:8px;border:1px solid #D7DAE0;border-radius:3px;">
+  <input id="lead-phone" placeholder="Phone number" style="width:100%;padding:9px;margin-bottom:8px;border:1px solid #D7DAE0;border-radius:3px;">
+  <textarea id="lead-message" placeholder="What would you like to know?" rows="3" style="width:100%;padding:9px;margin-bottom:12px;border:1px solid #D7DAE0;border-radius:3px;"></textarea>
+  <button id="lead-submit" style="background:#1B5FAE;color:#fff;border:none;padding:10px 18px;border-radius:3px;font-weight:bold;cursor:pointer;">Request a callback</button>
+  <p id="lead-msg" style="font-size:12.5px;margin-top:10px;"></p>
+</div>
+
+<script>
+(function(){
+  var msg = document.getElementById('lead-msg');
+  function show(text, isErr){ msg.textContent = text; msg.style.color = isErr ? '#C0392B' : '#2E7D32'; }
+
+  // populate the always-visible call/WhatsApp links from the single
+  // source of truth on the backend, instead of hardcoding the number
+  // on every page.
+  BuyeApi.getContact().then(function(r){
+    if(!r.success) return;
+    document.getElementById('lead-phone-link').href = 'tel:' + r.phone;
+    document.getElementById('lead-whatsapp-link').href = r.whatsapp;
+  });
+
+  document.getElementById('lead-submit').addEventListener('click', function(){
+    var name = document.getElementById('lead-name').value.trim();
+    var phone = document.getElementById('lead-phone').value.trim();
+    var message = document.getElementById('lead-message').value.trim();
+    if(!name || !phone){ show('Please enter your name and phone number.', true); return; }
+    show('Sending…', false);
+    BuyeApi.submitLead({ name: name, phone: phone, message: message, source: 'ielts.buye.online — callback form' })
+      .then(function(r){ show(r.message, !r.success); });
+  });
+})();
+</script>

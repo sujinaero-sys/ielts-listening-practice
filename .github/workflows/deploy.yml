@@ -1,0 +1,41 @@
+name: Deploy backend to Apps Script
+
+# Pushes that touch backend/ automatically push it to Apps Script via clasp.
+# Requires two repo secrets (Settings > Secrets and variables > Actions):
+#   CLASPRC_JSON   contents of your local ~/.clasprc.json (from `clasp login`)
+#   SCRIPT_ID      your Apps Script project ID (from .clasp.json)
+#
+# The frontend/ folder is plain static files — deploy it however
+# ielts.buye.online is currently hosted (this workflow only handles the
+# Apps Script backend).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'backend/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install clasp
+        run: npm install -g @google/clasp
+
+      - name: Restore clasp credentials
+        run: echo '${{ secrets.CLASPRC_JSON }}' > ~/.clasprc.json
+
+      - name: Write .clasp.json
+        run: echo '{"scriptId":"${{ secrets.SCRIPT_ID }}","rootDir":"backend"}' > .clasp.json
+
+      - name: Push to Apps Script
+        run: clasp push --force
+
+      - name: Create a versioned deployment
+        run: clasp deploy --description "Auto-deploy $(date -u +%Y-%m-%dT%H:%M:%SZ)"

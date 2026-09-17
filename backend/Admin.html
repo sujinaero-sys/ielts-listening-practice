@@ -1,0 +1,551 @@
+<!doctype html>
+<html>
+<head>
+<base target="_top">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{
+    --bg:#EDEFF2; --panel:#fff; --line:#D7DAE0; --ink:#1B2430; --ink-soft:#5B6270;
+    --header:#161E2B; --blue:#1B5FAE; --blue-dark:#134A8A; --green:#2E7D32; --red:#C0392B;
+    --amber:#B8860B; --toggle-bg:#fff; --toggle-icon:#B8860B;
+  }
+  [data-theme="dark"]{
+    --bg:#0F1420; --panel:#171D2C; --line:#2A3244; --ink:#EDEFF5; --ink-soft:#9AA3B8;
+    --header:#0B0F18; --blue:#6FA8E8; --blue-dark:#8FC0F5; --green:#59C26E; --red:#E8776B;
+    --amber:#E0B04A; --toggle-bg:#232B3D; --toggle-icon:#E0B04A;
+  }
+  html{ transition:background-color .15s ease; }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:Arial, "Helvetica Neue", Helvetica, sans-serif; font-size:14px; }
+  header{ background:var(--header); color:#fff; padding:14px 22px; display:flex; align-items:center; gap:12px; }
+  header strong{ font-size:14px; }
+  header span{ font-size:11.5px; color:#9FA9BC; display:block; }
+  header .spacer{ flex:1; }
+  header button{ background:none; border:1px solid #3A4459; color:#fff; padding:6px 12px; border-radius:3px; font-size:12px; cursor:pointer; }
+  .theme-toggle-btn{
+    width:32px; height:32px; border-radius:50%; border:1px solid var(--line);
+    background:var(--toggle-bg); color:var(--toggle-icon); font-size:15px; line-height:1;
+    cursor:pointer; display:inline-flex; align-items:center; justify-content:center; flex:none;
+  }
+  .brand-mark{ background:#fff; border-radius:8px; padding:3px; display:inline-flex; flex:none; }
+  .brand-mark img{ display:block; border-radius:5px; }
+  main{ max-width:980px; margin:0 auto; padding:24px 20px 60px; }
+  .hidden{ display:none !important; }
+
+  /* login card */
+  .login-wrap{ display:flex; align-items:center; justify-content:center; min-height:70vh; }
+  .login-card{ background:var(--panel); border:1px solid var(--line); border-radius:4px; padding:30px 28px; max-width:380px; width:100%; }
+  .login-card h2{ font-size:17px; margin:0 0 4px; }
+  .login-card p{ font-size:12.5px; color:var(--ink-soft); margin:0 0 18px; }
+  .field{ margin-bottom:12px; }
+  .field label{ display:block; font-size:12px; font-weight:bold; margin-bottom:5px; }
+  .field input{ width:100%; padding:9px 10px; border:1px solid var(--line); border-radius:3px; font-size:13.5px; }
+  .btn{ background:var(--blue); color:#fff; border:none; border-radius:3px; padding:10px 16px; font-size:13.5px; font-weight:bold; cursor:pointer; }
+  .btn:hover{ background:var(--blue-dark); }
+  .btn:disabled{ opacity:.5; cursor:default; }
+  .btn-outline{ background:#fff; border:1px solid var(--line); color:var(--ink); }
+  .msg{ font-size:12.5px; margin-top:10px; }
+  .msg.err{ color:var(--red); }
+  .msg.ok{ color:var(--green); }
+
+  /* dashboard */
+  .tabs{ display:flex; gap:4px; margin-bottom:18px; border-bottom:1px solid var(--line); }
+  .tabs button{ background:none; border:none; padding:9px 16px; font-size:13px; cursor:pointer; color:var(--ink-soft); border-bottom:2px solid transparent; }
+  .tabs button.active{ color:var(--ink); border-bottom-color:var(--blue); font-weight:bold; }
+  .panel{ display:none; }
+  .panel.active{ display:block; }
+
+  table{ width:100%; border-collapse:collapse; background:var(--panel); border:1px solid var(--line); font-size:13px; }
+  th,td{ padding:9px 10px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+  th{ background:#F3F4F6; font-size:11.5px; }
+  tr:last-child td{ border-bottom:none; }
+  .badge{ display:inline-block; padding:2px 8px; border-radius:10px; font-size:11px; font-weight:bold; }
+  .badge.pending{ background:#FCEFD6; color:var(--amber); }
+  .badge.approved{ background:#E9F5EA; color:var(--green); }
+  .badge.rejected, .badge.suspended{ background:#FBE8E6; color:var(--red); }
+  .row-actions{ display:flex; gap:6px; flex-wrap:wrap; }
+  .row-actions button{ font-size:11.5px; padding:5px 10px; border-radius:3px; border:1px solid var(--line); background:#fff; cursor:pointer; }
+  .row-actions button.approve{ border-color:var(--green); color:var(--green); }
+  .row-actions button.reject{ border-color:var(--red); color:var(--red); }
+  .empty{ padding:26px; text-align:center; color:var(--ink-soft); font-size:13px; }
+  select.status-select{ font-size:12.5px; padding:4px; border-radius:3px; border:1px solid var(--line); }
+  .toolbar{ display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
+  .toolbar button{ font-size:12px; padding:6px 12px; border-radius:3px; border:1px solid var(--line); background:#fff; cursor:pointer; }
+  .form-box{ background:var(--panel); border:1px solid var(--line); border-radius:4px; padding:18px 20px; }
+  .form-box h3{ margin:0 0 14px; font-size:14px; }
+  .form-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px 16px; }
+  .form-grid label, #panel-tests > .form-box > label{ display:flex; flex-direction:column; gap:5px; font-size:12px; font-weight:bold; color:var(--ink-soft); }
+  .form-grid input, .form-grid select, #panel-tests input, #panel-tests select, #panel-tests textarea, #panel-subscriptions select{
+    font-size:13px; padding:7px 8px; border:1px solid var(--line); border-radius:3px; font-weight:normal; color:var(--ink); background:#fff;
+  }
+  #tf-answerKey{ font-family:'IBM Plex Mono',monospace; font-size:12px; width:100%; box-sizing:border-box; }
+  #panel-tests button, #panel-subscriptions button{ background:var(--blue); color:#fff; border:none; border-radius:3px; padding:8px 16px; font-size:12.5px; font-weight:bold; cursor:pointer; }
+  .msg{ font-size:12px; }
+  .msg.err{ color:var(--red); } .msg.ok{ color:var(--green); }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="brand-mark"><img src="data:image/png;base64,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" alt="" style="width:22px;height:22px;"></span>
+  <div><strong>BUYE-Online</strong><span>Admin Dashboard — IELTS Listening Portal</span></div>
+  <div class="spacer"></div>
+  <button class="theme-toggle-btn" id="theme-toggle" aria-label="Switch to dark mode">&#9789;</button>
+  <button id="logout-btn" class="hidden">Log out</button>
+</header>
+
+<main>
+  <!-- LOGIN -->
+  <div id="login-wrap" class="login-wrap">
+    <div class="login-card">
+      <h2>Admin sign-in</h2>
+      <p>Sign in with an email that has the <b>admin</b> role in the Accounts sheet. You'll receive a one-time code by email.</p>
+
+      <div id="step-email">
+        <div class="field">
+          <label>Admin email</label>
+          <input type="email" id="login-email" placeholder="you@buye.online">
+        </div>
+        <button class="btn" id="send-otp-btn">Send code</button>
+      </div>
+
+      <div id="step-otp" class="hidden">
+        <div class="field">
+          <label>6-digit code</label>
+          <input type="text" id="login-otp" inputmode="numeric" maxlength="6" placeholder="123456">
+        </div>
+        <button class="btn" id="verify-otp-btn">Verify &amp; sign in</button>
+        <button class="btn btn-outline" id="resend-otp-btn" style="margin-left:8px;">Resend</button>
+      </div>
+
+      <div id="login-msg" class="msg"></div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div id="dash-wrap" class="hidden">
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="pending">Pending accounts</button>
+      <button class="tab-btn" data-tab="accounts">All accounts</button>
+      <button class="tab-btn" data-tab="leads">Leads / inquiries</button>
+      <button class="tab-btn" data-tab="tests">Tests</button>
+      <button class="tab-btn" data-tab="subscriptions">Subscriptions</button>
+    </div>
+
+    <div id="panel-pending" class="panel active">
+      <div class="toolbar"><span></span><button id="refresh-pending">Refresh</button></div>
+      <table>
+        <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Requested</th><th>Actions</th></tr></thead>
+        <tbody id="pending-body"></tbody>
+      </table>
+    </div>
+
+    <div id="panel-accounts" class="panel">
+      <div class="toolbar"><span></span><button id="refresh-accounts">Refresh</button></div>
+      <table>
+        <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Status</th><th>Approved by</th><th>Actions</th></tr></thead>
+        <tbody id="accounts-body"></tbody>
+      </table>
+    </div>
+
+    <div id="panel-leads" class="panel">
+      <div class="toolbar"><span></span><button id="refresh-leads">Refresh</button></div>
+      <table>
+        <thead><tr><th>Name</th><th>Contact</th><th>Source</th><th>Message</th><th>Status</th><th>Notes</th></tr></thead>
+        <tbody id="leads-body"></tbody>
+      </table>
+    </div>
+
+    <div id="panel-tests" class="panel">
+      <div class="form-box">
+        <h3>Create / update a test</h3>
+        <div class="form-grid">
+          <label>Test ID <input id="tf-testId" placeholder="test-2"></label>
+          <label>Module <select id="tf-module"><option value="listening">listening</option></select></label>
+          <label>Title <input id="tf-title" placeholder="IELTS Listening — Test 2"></label>
+          <label>Access tier <select id="tf-accessTier"><option value="free">free</option><option value="premium">premium</option></select></label>
+          <label>Status <select id="tf-status"><option value="draft">draft</option><option value="published">published</option></select></label>
+          <label>Question count <input id="tf-questionCount" type="number" value="40"></label>
+          <label>Part boundaries (comma-separated) <input id="tf-partBoundaries" placeholder="10,20,30,40"></label>
+          <label>Excluded questions (comma-separated, optional) <input id="tf-excluded" placeholder="17,18,19,20"></label>
+          <label>Audio URL <input id="tf-audioUrl" placeholder="https://.../audio.mp3"></label>
+          <label>Tags <input id="tf-tags" placeholder="listening, free"></label>
+        </div>
+        <label style="display:block;margin-top:10px;">Answer key (JSON — {"1":["answer","alt"], ...})
+          <textarea id="tf-answerKey" rows="5" placeholder='{"1":["300"],"2":["sunshade"]}'></textarea>
+        </label>
+        <div style="margin-top:12px;"><button id="tf-save">Save test</button> <span id="tf-msg" class="msg"></span></div>
+      </div>
+
+      <div class="toolbar" style="margin-top:20px;"><span></span><button id="refresh-tests">Refresh list</button></div>
+      <table>
+        <thead><tr><th>Test ID</th><th>Title</th><th>Access</th><th>Status</th><th>Questions</th><th>Actions</th></tr></thead>
+        <tbody id="tests-body"></tbody>
+      </table>
+    </div>
+
+    <div id="panel-subscriptions" class="panel">
+      <div class="form-box">
+        <h3>Grant a subscription manually</h3>
+        <div class="form-grid">
+          <label>Student <select id="sf-account"></select></label>
+          <label>Plan <select id="sf-plan"></select></label>
+        </div>
+        <div style="margin-top:12px;"><button id="sf-grant">Grant access</button> <span id="sf-msg" class="msg"></span></div>
+      </div>
+
+      <div class="toolbar" style="margin-top:20px;"><span></span><button id="refresh-subs">Refresh list</button></div>
+      <table>
+        <thead><tr><th>Account</th><th>Plan</th><th>Status</th><th>Expires</th><th>Source</th></tr></thead>
+        <tbody id="subs-body"></tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<script>
+(function(){
+  "use strict";
+
+  // Dark-mode toggle — same approach as frontend/shared/theme-toggle.js
+  // (can't reference that file directly since this page is served by
+  // Apps Script, not the static frontend host).
+  (function(){
+    var root = document.documentElement;
+    var btn = document.getElementById('theme-toggle');
+    var mql = window.matchMedia('(prefers-color-scheme: dark)');
+    var manual = false;
+    function apply(theme){
+      root.setAttribute('data-theme', theme);
+      if(btn){
+        btn.textContent = theme === 'dark' ? '\u2600' : '\u263D';
+        btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+      }
+    }
+    var current = mql.matches ? 'dark' : 'light';
+    apply(current);
+    if(btn){
+      btn.addEventListener('click', function(){
+        manual = true;
+        current = current === 'dark' ? 'light' : 'dark';
+        apply(current);
+      });
+    }
+    mql.addEventListener('change', function(e){
+      if(manual) return;
+      current = e.matches ? 'dark' : 'light';
+      apply(current);
+    });
+  })();
+
+  // google.script.run is available automatically inside an Apps Script
+  // HtmlService page — no fetch()/CORS needed since this page is served
+  // by the same Apps Script project as the API.
+  function call(action, payload){
+    return new Promise(function(resolve, reject){
+      google.script.run
+        .withSuccessHandler(resolve)
+        .withFailureHandler(function(err){ reject(err); })
+        .apiCallFromAdmin(action, payload || {});
+    });
+  }
+
+  var token = sessionStorage.getItem('buye_admin_token') || '';
+  var loginEmail = '';
+
+  var loginWrap = document.getElementById('login-wrap');
+  var dashWrap = document.getElementById('dash-wrap');
+  var logoutBtn = document.getElementById('logout-btn');
+  var loginMsg = document.getElementById('login-msg');
+
+  function showMsg(text, isErr){
+    loginMsg.textContent = text;
+    loginMsg.className = 'msg ' + (isErr ? 'err' : 'ok');
+  }
+
+  document.getElementById('send-otp-btn').addEventListener('click', function(){
+    loginEmail = document.getElementById('login-email').value.trim();
+    if(!loginEmail){ showMsg('Enter your email first.', true); return; }
+    showMsg('Sending code…', false);
+    call('requestOtp', { email: loginEmail, purpose: 'login' }).then(function(r){
+      showMsg(r.message, !r.success);
+      if(r.success){
+        document.getElementById('step-email').classList.add('hidden');
+        document.getElementById('step-otp').classList.remove('hidden');
+      }
+    }).catch(function(e){ showMsg(String(e), true); });
+  });
+
+  document.getElementById('resend-otp-btn').addEventListener('click', function(){
+    call('requestOtp', { email: loginEmail, purpose: 'login' }).then(function(r){
+      showMsg(r.message, !r.success);
+    });
+  });
+
+  document.getElementById('verify-otp-btn').addEventListener('click', function(){
+    var otp = document.getElementById('login-otp').value.trim();
+    call('verifyOtp', { email: loginEmail, otp: otp, purpose: 'login' }).then(function(r){
+      if(!r.success){ showMsg(r.message, true); return; }
+      if(r.role !== 'admin'){ showMsg('This account does not have admin access.', true); return; }
+      token = r.token;
+      sessionStorage.setItem('buye_admin_token', token);
+      enterDashboard();
+    }).catch(function(e){ showMsg(String(e), true); });
+  });
+
+  logoutBtn.addEventListener('click', function(){
+    call('logout', { token: token }).finally(function(){
+      sessionStorage.removeItem('buye_admin_token');
+      window.location.reload();
+    });
+  });
+
+  function enterDashboard(){
+    loginWrap.classList.add('hidden');
+    dashWrap.classList.remove('hidden');
+    logoutBtn.classList.remove('hidden');
+    loadPending();
+  }
+
+  /* ---------- tabs ---------- */
+  document.querySelectorAll('.tab-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+      document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
+      btn.classList.add('active');
+      document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+      if(btn.dataset.tab === 'pending') loadPending();
+      if(btn.dataset.tab === 'accounts') loadAccounts();
+      if(btn.dataset.tab === 'leads') loadLeads();
+      if(btn.dataset.tab === 'tests') loadTests();
+      if(btn.dataset.tab === 'subscriptions') loadSubscriptionsTab();
+    });
+  });
+
+  /* ---------- pending accounts ---------- */
+  function loadPending(){
+    var body = document.getElementById('pending-body');
+    body.innerHTML = '<tr><td colspan="5" class="empty">Loading…</td></tr>';
+    call('adminListPendingAccounts', { token: token }).then(function(r){
+      if(!r.success){ body.innerHTML = '<tr><td colspan="5" class="empty">'+esc(r.message)+'</td></tr>'; return; }
+      if(!r.accounts.length){ body.innerHTML = '<tr><td colspan="5" class="empty">No accounts awaiting approval.</td></tr>'; return; }
+      body.innerHTML = r.accounts.map(function(a){
+        return '<tr>' +
+          '<td>'+esc(a.Name)+'</td>' +
+          '<td>'+esc(a.Email)+'</td>' +
+          '<td>'+esc(a.Phone)+'</td>' +
+          '<td>'+esc(fmtDate(a.CreatedAt))+'</td>' +
+          '<td class="row-actions">' +
+            '<button class="approve" data-id="'+esc(a.AccountId)+'" data-decision="approve">Approve</button>' +
+            '<button class="reject" data-id="'+esc(a.AccountId)+'" data-decision="reject">Reject</button>' +
+          '</td>' +
+        '</tr>';
+      }).join('');
+      body.querySelectorAll('button[data-decision]').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          btn.disabled = true;
+          call('adminSetAccountStatus', { token: token, accountId: btn.dataset.id, decision: btn.dataset.decision })
+            .then(function(){ loadPending(); });
+        });
+      });
+    });
+  }
+  document.getElementById('refresh-pending').addEventListener('click', loadPending);
+
+  /* ---------- all accounts ---------- */
+  function loadAccounts(){
+    var body = document.getElementById('accounts-body');
+    body.innerHTML = '<tr><td colspan="6" class="empty">Loading…</td></tr>';
+    call('adminListAccounts', { token: token }).then(function(r){
+      if(!r.success){ body.innerHTML = '<tr><td colspan="6" class="empty">'+esc(r.message)+'</td></tr>'; return; }
+      if(!r.accounts.length){ body.innerHTML = '<tr><td colspan="6" class="empty">No accounts yet.</td></tr>'; return; }
+      body.innerHTML = r.accounts.map(function(a){
+        var canSuspend = a.Status === 'approved';
+        return '<tr>' +
+          '<td>'+esc(a.Name)+'</td>' +
+          '<td>'+esc(a.Email)+'</td>' +
+          '<td>'+esc(a.Role)+'</td>' +
+          '<td><span class="badge '+esc(a.Status)+'">'+esc(a.Status)+'</span></td>' +
+          '<td>'+esc(a.ApprovedBy||'—')+'</td>' +
+          '<td class="row-actions">' +
+            (canSuspend ? '<button class="reject" data-id="'+esc(a.AccountId)+'" data-decision="suspend">Suspend</button>' : '') +
+          '</td>' +
+        '</tr>';
+      }).join('');
+      body.querySelectorAll('button[data-decision]').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          btn.disabled = true;
+          call('adminSetAccountStatus', { token: token, accountId: btn.dataset.id, decision: btn.dataset.decision })
+            .then(function(){ loadAccounts(); });
+        });
+      });
+    });
+  }
+  document.getElementById('refresh-accounts').addEventListener('click', loadAccounts);
+
+  /* ---------- leads ---------- */
+  var LEAD_STATUSES = ['new','contacted','converted','closed'];
+  function loadLeads(){
+    var body = document.getElementById('leads-body');
+    body.innerHTML = '<tr><td colspan="6" class="empty">Loading…</td></tr>';
+    call('adminListLeads', { token: token }).then(function(r){
+      if(!r.success){ body.innerHTML = '<tr><td colspan="6" class="empty">'+esc(r.message)+'</td></tr>'; return; }
+      if(!r.leads.length){ body.innerHTML = '<tr><td colspan="6" class="empty">No leads yet.</td></tr>'; return; }
+      body.innerHTML = r.leads.map(function(l){
+        var opts = LEAD_STATUSES.map(function(s){
+          return '<option value="'+s+'"'+(s===l.Status?' selected':'')+'>'+s+'</option>';
+        }).join('');
+        return '<tr>' +
+          '<td>'+esc(l.Name)+'</td>' +
+          '<td>'+esc(l.Phone||l.Email)+'</td>' +
+          '<td>'+esc(l.Source)+'</td>' +
+          '<td>'+esc(l.Message)+'</td>' +
+          '<td><select class="status-select" data-id="'+esc(l.LeadId)+'">'+opts+'</select></td>' +
+          '<td><input type="text" class="notes-input" data-id="'+esc(l.LeadId)+'" value="'+esc(l.Notes||'')+'" placeholder="notes" style="font-size:12px;padding:4px;width:120px;"></td>' +
+        '</tr>';
+      }).join('');
+      body.querySelectorAll('.status-select').forEach(function(sel){
+        sel.addEventListener('change', function(){
+          call('adminUpdateLead', { token: token, leadId: sel.dataset.id, status: sel.value });
+        });
+      });
+      body.querySelectorAll('.notes-input').forEach(function(inp){
+        inp.addEventListener('change', function(){
+          call('adminUpdateLead', { token: token, leadId: inp.dataset.id, notes: inp.value });
+        });
+      });
+    });
+  }
+  document.getElementById('refresh-leads').addEventListener('click', loadLeads);
+
+  /* ---------- tests ---------- */
+  function loadTests(){
+    var body = document.getElementById('tests-body');
+    body.innerHTML = '<tr><td colspan="6" class="empty">Loading…</td></tr>';
+    call('adminListTests', { token: token }).then(function(r){
+      if(!r.success){ body.innerHTML = '<tr><td colspan="6" class="empty">'+esc(r.message)+'</td></tr>'; return; }
+      if(!r.tests.length){ body.innerHTML = '<tr><td colspan="6" class="empty">No tests yet — use the form above.</td></tr>'; return; }
+      body.innerHTML = r.tests.map(function(t){
+        return '<tr>' +
+          '<td>'+esc(t.TestId)+'</td>' +
+          '<td>'+esc(t.Title)+'</td>' +
+          '<td><span class="badge '+(t.AccessTier==='premium'?'pending':'approved')+'">'+esc(t.AccessTier)+'</span></td>' +
+          '<td><span class="badge '+(t.Status==='published'?'approved':'pending')+'">'+esc(t.Status)+'</span></td>' +
+          '<td>'+esc(t.QuestionCount)+'</td>' +
+          '<td><button class="edit-test" data-id="'+esc(t.TestId)+'">Edit</button></td>' +
+        '</tr>';
+      }).join('');
+      body.querySelectorAll('.edit-test').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var t = r.tests.find(function(x){ return x.TestId === btn.dataset.id; });
+          if(!t) return;
+          document.getElementById('tf-testId').value = t.TestId;
+          document.getElementById('tf-module').value = t.Module;
+          document.getElementById('tf-title').value = t.Title;
+          document.getElementById('tf-accessTier').value = t.AccessTier;
+          document.getElementById('tf-status').value = t.Status;
+          document.getElementById('tf-questionCount').value = t.QuestionCount;
+          document.getElementById('tf-partBoundaries').value = (function(){ try{ return JSON.parse(t.PartBoundariesJson).join(','); }catch(e){ return ''; } })();
+          document.getElementById('tf-excluded').value = (function(){ try{ return JSON.parse(t.ExcludedQuestionsJson||'[]').join(','); }catch(e){ return ''; } })();
+          document.getElementById('tf-audioUrl').value = t.AudioUrl;
+          document.getElementById('tf-tags').value = t.Tags;
+          document.getElementById('tf-answerKey').value = t.AnswerKeyJson;
+          window.scrollTo(0,0);
+        });
+      });
+    });
+  }
+  document.getElementById('refresh-tests').addEventListener('click', loadTests);
+
+  document.getElementById('tf-save').addEventListener('click', function(){
+    var msg = document.getElementById('tf-msg');
+    var partBoundaries = document.getElementById('tf-partBoundaries').value.split(',').map(function(s){ return parseInt(s.trim(),10); }).filter(function(n){ return !isNaN(n); });
+    var excludedQuestions = document.getElementById('tf-excluded').value.split(',').map(function(s){ return parseInt(s.trim(),10); }).filter(function(n){ return !isNaN(n); });
+    var answerKey;
+    try{
+      answerKey = document.getElementById('tf-answerKey').value.trim() ? JSON.parse(document.getElementById('tf-answerKey').value) : {};
+    }catch(e){
+      msg.textContent = 'Answer key is not valid JSON.'; msg.className = 'msg err'; return;
+    }
+    var payload = {
+      token: token,
+      testId: document.getElementById('tf-testId').value.trim(),
+      module: document.getElementById('tf-module').value,
+      title: document.getElementById('tf-title').value.trim(),
+      accessTier: document.getElementById('tf-accessTier').value,
+      status: document.getElementById('tf-status').value,
+      questionCount: parseInt(document.getElementById('tf-questionCount').value, 10) || 40,
+      partBoundaries: partBoundaries.length ? partBoundaries : [10,20,30,40],
+      excludedQuestions: excludedQuestions,
+      audioUrl: document.getElementById('tf-audioUrl').value.trim(),
+      tags: document.getElementById('tf-tags').value.trim(),
+      answerKey: answerKey
+    };
+    if(!payload.testId){ msg.textContent = 'Test ID is required.'; msg.className = 'msg err'; return; }
+    msg.textContent = 'Saving…'; msg.className = 'msg';
+    call('adminUpsertTest', payload).then(function(r){
+      msg.textContent = r.success ? 'Saved.' : (r.message || 'Could not save.');
+      msg.className = 'msg ' + (r.success ? 'ok' : 'err');
+      if(r.success) loadTests();
+    });
+  });
+
+  /* ---------- subscriptions ---------- */
+  function loadSubscriptionsTab(){
+    var accSel = document.getElementById('sf-account');
+    var planSel = document.getElementById('sf-plan');
+    accSel.innerHTML = '<option>Loading…</option>';
+    planSel.innerHTML = '<option>Loading…</option>';
+
+    call('adminListAccounts', { token: token, status: 'approved' }).then(function(r){
+      accSel.innerHTML = (r.success ? r.accounts : []).filter(function(a){ return a.Role === 'student'; })
+        .map(function(a){ return '<option value="'+esc(a.AccountId)+'">'+esc(a.Name)+' ('+esc(a.Email)+')</option>'; }).join('')
+        || '<option value="">No approved students yet</option>';
+    });
+    call('adminListPlans', { token: token }).then(function(r){
+      planSel.innerHTML = (r.success ? r.plans : [])
+        .map(function(p){ return '<option value="'+esc(p.PlanId)+'">'+esc(p.Name)+' — '+esc(p.DurationDays)+' days</option>'; }).join('')
+        || '<option value="">No plans yet</option>';
+    });
+
+    var body = document.getElementById('subs-body');
+    body.innerHTML = '<tr><td colspan="5" class="empty">Loading…</td></tr>';
+    call('adminListSubscriptions', { token: token }).then(function(r){
+      if(!r.success){ body.innerHTML = '<tr><td colspan="5" class="empty">'+esc(r.message)+'</td></tr>'; return; }
+      if(!r.subscriptions.length){ body.innerHTML = '<tr><td colspan="5" class="empty">No subscriptions yet.</td></tr>'; return; }
+      body.innerHTML = r.subscriptions.map(function(s){
+        return '<tr>' +
+          '<td>'+esc(s.AccountId)+'</td>' +
+          '<td>'+esc(s.PlanId)+'</td>' +
+          '<td><span class="badge '+(s.Status==='active'?'approved':'pending')+'">'+esc(s.Status)+'</span></td>' +
+          '<td>'+esc(fmtDate(s.EndDate))+'</td>' +
+          '<td>'+esc(s.Source)+'</td>' +
+        '</tr>';
+      }).join('');
+    });
+  }
+  document.getElementById('refresh-subs').addEventListener('click', loadSubscriptionsTab);
+
+  document.getElementById('sf-grant').addEventListener('click', function(){
+    var msg = document.getElementById('sf-msg');
+    var accountId = document.getElementById('sf-account').value;
+    var planId = document.getElementById('sf-plan').value;
+    if(!accountId || !planId){ msg.textContent = 'Pick a student and a plan.'; msg.className = 'msg err'; return; }
+    msg.textContent = 'Granting…'; msg.className = 'msg';
+    call('adminGrantSubscription', { token: token, accountId: accountId, planId: planId }).then(function(r){
+      msg.textContent = r.success ? ('Granted until ' + fmtDate(r.expiresAt)) : (r.message || 'Could not grant.');
+      msg.className = 'msg ' + (r.success ? 'ok' : 'err');
+      if(r.success) loadSubscriptionsTab();
+    });
+  });
+
+  /* ---------- helpers ---------- */
+  function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+  function fmtDate(iso){ try{ return new Date(iso).toLocaleString(); }catch(e){ return iso; } }
+
+  if(token){ enterDashboard(); }
+})();
+</script>
+</body>
+</html>

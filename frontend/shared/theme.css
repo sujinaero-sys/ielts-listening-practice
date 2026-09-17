@@ -1,0 +1,104 @@
+/**
+ * BUYE-Online — shared theme
+ * ============================
+ * One set of CSS variables, consumed by every page (catalogue, every
+ * test engine, and — via inlined copies of these same values — the
+ * Admin dashboard, which can't link an external stylesheet).
+ *
+ * Default is light ("site theme should be white"). Dark mode is opted
+ * into by setting data-theme="dark" on <html> — see theme-toggle.js,
+ * which does that automatically based on the visitor's OS preference
+ * and the toggle button in the header.
+ *
+ * Keep light/dark variable NAMES identical across both blocks — pages
+ * reference them with var(--x) and never care which theme is active.
+ */
+
+:root {
+  --bg: #EDEFF2;
+  --panel: #FFFFFF;
+  --line: #D7DAE0;
+  --line-strong: #B9BEC7;
+  --ink: #1B2430;
+  --ink-soft: #5B6270;
+  --header: #161E2B;
+  --header-line: #2B3546;
+
+  --blue: #1B5FAE;
+  --blue-dark: #134A8A;
+  --blue-pale: #E7F0FA;
+  --green: #2E7D32;
+  --green-pale: #E9F5EA;
+  --amber: #B8860B;
+  --red: #C0392B;
+  --flag: #C0392B;
+
+  --toggle-bg: #FFFFFF;
+  --toggle-icon: #B8860B;
+}
+
+[data-theme="dark"] {
+  --bg: #0F1420;
+  --panel: #171D2C;
+  --line: #2A3244;
+  --line-strong: #3A4459;
+  --ink: #EDEFF5;
+  --ink-soft: #9AA3B8;
+  --header: #0B0F18;
+  --header-line: #232B3D;
+
+  --blue: #6FA8E8;
+  --blue-dark: #8FC0F5;
+  --blue-pale: #1B2A40;
+  --green: #59C26E;
+  --green-pale: #163524;
+  --amber: #E0B04A;
+  --red: #E8776B;
+  --flag: #E8776B;
+
+  --toggle-bg: #232B3D;
+  --toggle-icon: #E0B04A;
+}
+
+/* Smooth, not jarring, when the toggle flips. */
+html {
+  transition: background-color 0.15s ease;
+}
+body, .part-section, .mcq-block, table.qtable, .notes-block, .match-row,
+.card, .start-card, .score-hero, .sc-row {
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+/* Shared toggle-button look, used on every page that includes one. */
+.theme-toggle-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  background: var(--toggle-bg);
+  color: var(--toggle-icon);
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+.theme-toggle-btn:hover {
+  filter: brightness(0.95);
+}
+
+/* Small white badge behind the logo mark so it stays legible on a dark
+   header even though the PNG itself has a solid white background. */
+.brand-mark {
+  background: #FFFFFF;
+  border-radius: 8px;
+  padding: 3px;
+  display: inline-flex;
+  flex: none;
+}
+.brand-mark img {
+  display: block;
+  border-radius: 5px;
+}

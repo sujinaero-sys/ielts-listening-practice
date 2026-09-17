@@ -1,0 +1,65 @@
+﻿# ============================================================
+# BUYE IELTS — SECURITY / LOCAL FILES
+# ============================================================
+
+# Google Apps Script / Clasp credentials
+.clasprc.json
+.clasp.json
+
+# ============================================================
+# ANSWER KEYS — NEVER COMMIT
+# ============================================================
+
+# Any answer-key JSON anywhere in the project
+**/*answer-key*.json
+**/*answerkey*.json
+**/*answer_key*.json
+
+# Explicit IELTS answer-key documentation
+docs/*-answer-key.json
+docs/*_answer_key.json
+docs/*answerkey*.json
+
+# ============================================================
+# SECRETS / ENVIRONMENT CONFIGURATION
+# ============================================================
+
+.env
+.env.*
+!.env.example
+*.secret
+*.secrets
+*.key
+*.pem
+*.p12
+*.pfx
+
+# ============================================================
+# LOCAL / TEMPORARY FILES
+# ============================================================
+
+.DS_Store
+Thumbs.db
+node_modules/
+dist/
+build/
+coverage/
+.tmp/
+temp/
+tmp/
+
+# Local logs
+*.log
+
+# Editor / OS files
+.vscode/
+.idea/
+
+# ============================================================
+# BACKUP / EXPORT FILES
+# ============================================================
+
+*.bak
+*.backup
+*.old
+*.tmp
