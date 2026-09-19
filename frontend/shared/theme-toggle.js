@@ -1,19 +1,14 @@
-/**
+﻿/**
  * BUYE-Online — theme toggle
  * ============================
  * Include on any page that has <link rel="stylesheet" href=".../theme.css">
  * and a <button id="theme-toggle"> somewhere in its header.
  *
- * Defaults to the visitor's OS light/dark preference, then lets them
- * override it with the button for the rest of that page view.
+ * Defaults to the visitor's OS light/dark preference when no saved preference
+ * exists, then lets the visitor override it with the button.
  *
- * Note on persistence: this intentionally does NOT use localStorage,
- * so the choice doesn't carry over when navigating to a different page
- * (catalogue -> a test page, etc.) — it re-applies the OS preference on
- * each load instead. If you want the toggle to stick across page
- * navigation once this is live on your real domain, that's a small,
- * safe addition (a few lines wrapped in try/catch) — just ask and I'll
- * add it.
+ * The selected theme is persisted in localStorage so it carries across
+ * BUYE pages such as catalogue → Test 1 → Test 2 → Test 3.
  */
 (function () {
   "use strict";
@@ -26,7 +21,7 @@
   function apply(theme) {
     root.setAttribute("data-theme", theme);
     if (btn) {
-      btn.textContent = theme === "dark" ? "\u2600" : "\u263D"; // sun / moon
+      btn.textContent = theme === "dark" ? "\u2600" : "\u263D";
       btn.setAttribute(
         "aria-label",
         theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
@@ -34,7 +29,18 @@
     }
   }
 
-  var current = mql.matches ? "dark" : "light";
+  var current;
+
+  try {
+    var savedTheme = localStorage.getItem("buye_theme");
+    current =
+      savedTheme === "dark" || savedTheme === "light"
+        ? savedTheme
+        : (mql.matches ? "dark" : "light");
+  } catch (e) {
+    current = mql.matches ? "dark" : "light";
+  }
+
   apply(current);
 
   if (btn) {
@@ -42,11 +48,13 @@
       manualOverride = true;
       current = current === "dark" ? "light" : "dark";
       apply(current);
+
+      try {
+        localStorage.setItem("buye_theme", current);
+      } catch (e) {}
     });
   }
 
-  // Follow OS changes live, unless the visitor already used the button
-  // on this page view.
   mql.addEventListener("change", function (e) {
     if (manualOverride) return;
     current = e.matches ? "dark" : "light";

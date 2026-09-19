@@ -1,16 +1,16 @@
-/**
- * BUYE-Online — shared theme
+﻿/**
+ * BUYE-Online â€” shared theme
  * ============================
  * One set of CSS variables, consumed by every page (catalogue, every
- * test engine, and — via inlined copies of these same values — the
+ * test engine, and â€” via inlined copies of these same values â€” the
  * Admin dashboard, which can't link an external stylesheet).
  *
  * Default is light ("site theme should be white"). Dark mode is opted
- * into by setting data-theme="dark" on <html> — see theme-toggle.js,
+ * into by setting data-theme="dark" on <html> â€” see theme-toggle.js,
  * which does that automatically based on the visitor's OS preference
  * and the toggle button in the header.
  *
- * Keep light/dark variable NAMES identical across both blocks — pages
+ * Keep light/dark variable NAMES identical across both blocks â€” pages
  * reference them with var(--x) and never care which theme is active.
  */
 
@@ -29,6 +29,8 @@
   --blue-pale: #E7F0FA;
   --green: #2E7D32;
   --green-pale: #E9F5EA;
+  --surface-soft: #F3F4F6;
+  --surface-hover: #F5F6F8;
   --amber: #B8860B;
   --red: #C0392B;
   --flag: #C0392B;
@@ -52,6 +54,8 @@
   --blue-pale: #1B2A40;
   --green: #59C26E;
   --green-pale: #163524;
+  --surface-soft: #20283A;
+  --surface-hover: #263044;
   --amber: #E0B04A;
   --red: #E8776B;
   --flag: #E8776B;
@@ -102,3 +106,5 @@ body, .part-section, .mcq-block, table.qtable, .notes-block, .match-row,
   display: block;
   border-radius: 5px;
 }
+
+
