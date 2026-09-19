@@ -1,9 +1,9 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>IELTS Listening Practice — BUYE-Online</title>
+<title>IELTS Listening Practice â€” BUYE-Online</title>
 <link rel="icon" href="../assets/buye-mark-64.png">
 <link rel="stylesheet" href="../shared/theme.css">
 <style>
@@ -46,7 +46,7 @@
   <h1>Choose a listening test</h1>
   <p class="lead">Full-length, computer-delivered-style practice tests: one continuous recording, four parts, forty questions, timed.</p>
   <div id="content-slot">
-    <p class="state-msg">Loading…</p>
+    <p class="state-msg">Loadingâ€¦</p>
   </div>
 </main>
 <script src="../shared/theme-toggle.js"></script>
@@ -65,10 +65,10 @@
   });
 
   function loadCatalogue(token) {
-    slot.innerHTML = '<p class="state-msg">Loading tests…</p>';
+    slot.innerHTML = '<p class="state-msg">Loading testsâ€¦</p>';
     BuyeApi.getTestCatalogue(token).then(function (r) {
       if (!r.success) {
-        // Session likely expired — drop back into the login form.
+        // Session likely expired â€” drop back into the login form.
         BuyeAuthGate.require(slot, {
           subtitle: r.message || 'Please log in again.',
           onReady: loadCatalogue
@@ -80,6 +80,11 @@
   }
 
   function render(tests, upgradeUrl) {
+    tests.sort(function (a, b) {
+      var aNum = parseInt(String(a.testId).replace(/\D/g, ''), 10) || 0;
+      var bNum = parseInt(String(b.testId).replace(/\D/g, ''), 10) || 0;
+      return aNum - bNum;
+    });
     if (!tests.length) {
       slot.innerHTML = '<div class="grid"><div class="card placeholder">No tests published yet.</div></div>';
       return;
@@ -121,3 +126,4 @@
 </script>
 </body>
 </html>
+

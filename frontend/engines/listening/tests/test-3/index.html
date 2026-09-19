@@ -1,0 +1,395 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>IELTS Listening — Computer-Delivered Test 3</title>
+<link rel="icon" href="../../../../assets/buye-mark-64.png">
+<link rel="stylesheet" href="../../engine/exam-theme.css">
+
+</head>
+<body>
+
+<!-- ===================== AUTH GATE ===================== -->
+<div id="auth-screen" class="hidden"></div>
+
+<!-- ===================== SOUND CHECK ===================== -->
+<div id="sc-screen" class="hidden">
+  <div class="sc-card">
+    <div class="sc-brand"><span class="brand-mark"><img src="../../../../assets/buye-mark-160.png" alt="" style="width:22px;height:22px;"></span><span>BUYE-ONLINE · COMPUTER-DELIVERED IELTS PRACTICE</span></div>
+    <h1>Listening test — sound check</h1>
+    <p class="sub">Before you begin, confirm your headphones are working. Once the test starts, the recording plays once and cannot be paused, rewound or replayed — exactly like the real computer-delivered test.</p>
+
+    <div class="sc-row">
+      <span class="lab">Volume</span>
+      <div class="sc-vol">
+        <input type="range" id="sc-vol" min="0" max="1" step="0.05" value="0.8">
+        <button class="sc-test-btn" id="sc-test-btn">Play test sound</button>
+      </div>
+    </div>
+
+    <div class="sc-row">
+      <label class="sc-confirm">
+        <input type="checkbox" id="sc-confirm">
+        I can hear the test sound clearly through my headphones.
+      </label>
+    </div>
+
+    <p class="sc-err" id="sc-err">Confirm you can hear the test sound before starting.</p>
+    <p id="sc-lock-msg"></p>
+
+    <div class="sc-actions">
+      <button class="btn-start" id="sc-start-btn">Start test</button>
+      <span class="sc-note">30 minutes · 4 parts · 40 questions</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== TEST SCREEN ===================== -->
+<div id="test-screen" class="hidden">
+  <header class="exam-bar">
+    <div class="exam-bar-inner">
+      <span class="brand-mark"><img class="logo" src="../../../../assets/buye-mark-160.png" alt=""></span>
+      <div>
+        <div class="title">IELTS Listening — Test 3</div>
+        <div class="who">Candidate practice session</div>
+      </div>
+      <div class="spacer"></div>
+      <div class="part-tag" id="part-tag">Part 1 of 4</div>
+      <div class="time-wrap" id="time-wrap">
+        <span class="lab">Time left</span>
+        <span class="val" id="timer">30:00</span>
+      </div>
+      <button class="theme-toggle-btn" id="theme-toggle" aria-label="Switch to dark mode">&#9789;</button>
+    </div>
+  </header>
+
+  <div class="part-tabs">
+    <div class="part-tabs-inner" id="part-tabs"></div>
+  </div>
+
+  <div class="body-wrap">
+    <main class="exam-main">
+
+      <!-- PART 1 -->
+      <section class="part-panel" data-part="1">
+        <div class="instr-box"><span class="pt">Questions 1–10</span>Complete the notes below. Write NO MORE THAN THREE WORDS AND/OR A NUMBER for each answer.</div>
+        <h2 class="q-title">Job Inquiry</h2>
+        <div class="notes-block">
+          <b>Work at: a restaurant</b><br>
+          · Type of work:
+          <span class="blank-wrap"><span class="qn-badge" id="badge-1">1</span><input class="ans" data-q="1" type="text"><button class="flag-btn" data-flag="1" aria-label="Flag question 1">&#9873;</button></span><br>
+          · Number of hours per week: 12 hours<br>
+          · Would need work permit<br>
+          · Work in the:
+          <span class="blank-wrap"><span class="qn-badge" id="badge-2">2</span><input class="ans" data-q="2" type="text"><button class="flag-btn" data-flag="2" aria-label="Flag question 2">&#9873;</button></span>
+          branch<br>
+          · Nearest bus stop: next to
+          <span class="blank-wrap"><span class="qn-badge" id="badge-3">3</span><input class="ans" data-q="3" type="text"><button class="flag-btn" data-flag="3" aria-label="Flag question 3">&#9873;</button></span><br>
+          · Pay:
+          <span class="blank-wrap"><span class="qn-badge" id="badge-4">4</span><input class="ans" data-q="4" type="text"><button class="flag-btn" data-flag="4" aria-label="Flag question 4">&#9873;</button></span>
+          £ an hour<br>
+          · Extra benefits: a free dinner<br>
+          · Extra pay when you work on
+          <span class="blank-wrap"><span class="qn-badge" id="badge-5">5</span><input class="ans" data-q="5" type="text"><button class="flag-btn" data-flag="5" aria-label="Flag question 5">&#9873;</button></span><br>
+          · Transport home when you work
+          <span class="blank-wrap"><span class="qn-badge" id="badge-6">6</span><input class="ans" data-q="6" type="text"><button class="flag-btn" data-flag="6" aria-label="Flag question 6">&#9873;</button></span><br>
+          · Qualities required:
+          <span class="blank-wrap"><span class="qn-badge" id="badge-7">7</span><input class="ans" data-q="7" type="text"><button class="flag-btn" data-flag="7" aria-label="Flag question 7">&#9873;</button></span><br>
+          · Ability to
+          <span class="blank-wrap"><span class="qn-badge" id="badge-8">8</span><input class="ans" data-q="8" type="text"><button class="flag-btn" data-flag="8" aria-label="Flag question 8">&#9873;</button></span><br>
+          · Interview arranged for: Thursday
+          <span class="blank-wrap"><span class="qn-badge" id="badge-9">9</span><input class="ans" data-q="9" type="text"><button class="flag-btn" data-flag="9" aria-label="Flag question 9">&#9873;</button></span>
+          at 6 pm<br>
+          · Ask for: Samira
+          <span class="blank-wrap"><span class="qn-badge" id="badge-10">10</span><input class="ans" data-q="10" type="text"><button class="flag-btn" data-flag="10" aria-label="Flag question 10">&#9873;</button></span>
+        </div>
+      </section>
+
+      <!-- PART 2 -->
+      <section class="part-panel" data-part="2">
+        <div class="instr-box"><span class="pt">Questions 11–16</span>Complete the notes below. Write ONE WORD AND/OR A NUMBER for each answer.</div>
+        <h2 class="q-title">Sports World</h2>
+        <div class="notes-block">
+          · A new
+          <span class="blank-wrap"><span class="qn-badge" id="badge-11">11</span><input class="ans" data-q="11" type="text"><button class="flag-btn" data-flag="11" aria-label="Flag question 11">&#9873;</button></span>
+          of an international sports goods company<br>
+          · Located in the shopping centre to the
+          <span class="blank-wrap"><span class="qn-badge" id="badge-12">12</span><input class="ans" data-q="12" type="text"><button class="flag-btn" data-flag="12" aria-label="Flag question 12">&#9873;</button></span>
+          of Bradcaster<br>
+          · Has sports
+          <span class="blank-wrap"><span class="qn-badge" id="badge-13">13</span><input class="ans" data-q="13" type="text"><button class="flag-btn" data-flag="13" aria-label="Flag question 13">&#9873;</button></span>
+          and equipment on floors 1–3<br>
+          · Can get you any item within
+          <span class="blank-wrap"><span class="qn-badge" id="badge-14">14</span><input class="ans" data-q="14" type="text"><button class="flag-btn" data-flag="14" aria-label="Flag question 14">&#9873;</button></span>
+          days<br>
+          · Shop specialises in equipment for
+          <span class="blank-wrap"><span class="qn-badge" id="badge-15">15</span><input class="ans" data-q="15" type="text"><button class="flag-btn" data-flag="15" aria-label="Flag question 15">&#9873;</button></span><br>
+          · Has a special section which just sells
+          <span class="blank-wrap"><span class="qn-badge" id="badge-16">16</span><input class="ans" data-q="16" type="text"><button class="flag-btn" data-flag="16" aria-label="Flag question 16">&#9873;</button></span>
+        </div>
+
+        <div class="instr-box"><span class="pt">Questions 17–18</span>Choose the correct letter, A, B or C.</div>
+
+        <div class="mcq-block">
+          <div class="stem-row"><span class="qn-badge" id="badge-17">17</span><p>A champion athlete will be in the shop</p><button class="flag-btn" data-flag="17" aria-label="Flag question 17">&#9873;</button></div>
+          <label class="mcq-opt" data-q="17"><input type="radio" name="q17" value="A"> on Saturday morning only</label>
+          <label class="mcq-opt" data-q="17"><input type="radio" name="q17" value="B"> all day Saturday</label>
+          <label class="mcq-opt" data-q="17"><input type="radio" name="q17" value="C"> for the whole weekend</label>
+        </div>
+
+        <div class="mcq-block">
+          <div class="stem-row"><span class="qn-badge" id="badge-18">18</span><p>The first person to answer 20 quiz questions correctly will win</p><button class="flag-btn" data-flag="18" aria-label="Flag question 18">&#9873;</button></div>
+          <label class="mcq-opt" data-q="18"><input type="radio" name="q18" value="A"> gym membership</label>
+          <label class="mcq-opt" data-q="18"><input type="radio" name="q18" value="B"> a video</label>
+          <label class="mcq-opt" data-q="18"><input type="radio" name="q18" value="C"> a calendar</label>
+        </div>
+
+        <div class="instr-box"><span class="pt">Questions 19–20</span>Choose TWO letters, A–E.</div>
+
+        <div class="mcq-block">
+          <div class="stem-row"><span class="qn-badge" id="badge-19">19</span><p>Which TWO pieces of information does the speaker give about the fitness test? — First answer</p><button class="flag-btn" data-flag="19" aria-label="Flag question 19">&#9873;</button></div>
+          <label class="mcq-opt" data-q="19"><input type="radio" name="q19" value="A"> You need to reserve a place</label>
+          <label class="mcq-opt" data-q="19"><input type="radio" name="q19" value="B"> It is free to account holders</label>
+          <label class="mcq-opt" data-q="19"><input type="radio" name="q19" value="C"> You get advice on how to improve your health</label>
+          <label class="mcq-opt" data-q="19"><input type="radio" name="q19" value="D"> It takes place in a special clinic</label>
+          <label class="mcq-opt" data-q="19"><input type="radio" name="q19" value="E"> It is cheaper this month</label>
+        </div>
+
+        <div class="mcq-block">
+          <div class="stem-row"><span class="qn-badge" id="badge-20">20</span><p>Which TWO pieces of information does the speaker give about the fitness test? — Second answer</p><button class="flag-btn" data-flag="20" aria-label="Flag question 20">&#9873;</button></div>
+          <label class="mcq-opt" data-q="20"><input type="radio" name="q20" value="A"> You need to reserve a place</label>
+          <label class="mcq-opt" data-q="20"><input type="radio" name="q20" value="B"> It is free to account holders</label>
+          <label class="mcq-opt" data-q="20"><input type="radio" name="q20" value="C"> You get advice on how to improve your health</label>
+          <label class="mcq-opt" data-q="20"><input type="radio" name="q20" value="D"> It takes place in a special clinic</label>
+          <label class="mcq-opt" data-q="20"><input type="radio" name="q20" value="E"> It is cheaper this month</label>
+        </div>
+      </section>
+
+      <!-- PART 3 -->
+      <section class="part-panel" data-part="3">
+        <div class="instr-box"><span class="pt">Questions 21–30</span>Choose the correct letter, A, B or C.</div>
+        <h2 class="q-title">Course Feedback</h2>
+
+        <div class="mcq-block">
+          <div class="stem-row"><span class="qn-badge" id="badge-21">21</span><p>One reason why Spiros felt happy about his marketing presentation was that</p><button class="flag-btn" data-flag="21" aria-label="Flag question 21">&#9873;</button></div>
+          <label class="mcq-opt" data-q="21"><input type="radio" name="q21" value="A"> he was not nervous</label>
+          <label class="mcq-opt" data-q="21"><input type="radio" name="q21" value="B"> his style was good</label>
+          <label class="mcq-opt" data-q="21"><input type="radio" name="q21" value="C"> the presentation was the best in his group</label>
+        </div>
+
+        <div class="mcq-block">
+          <div class="stem-row"><span class="qn-badge" id="badge-22">22</span><p>What surprised Hiroko about the other students' presentations?</p><button class="flag-btn" data-flag="22" aria-label="Flag question 22">&#9873;</button></div>
+          <label class="mcq-opt" data-q="22"><input type="radio" name="q22" value="A"> Their presentations were not interesting</label>
+          <label class="mcq-opt" data-q="22"><input type="radio" name="q22" value="B"> They found their presentations stressful</label>
+          <label class="mcq-opt" data-q="22"><input type="radio" name="q22" value="C"> They didn't look at the audience enough</label>
+        </div>
+
+        <div class="mcq-block">
+          <div class="stem-row"><span class="qn-badge" id="badge-23">23</span><p>After she gave her presentation, Hiroko felt</p><button class="flag-btn" data-flag="23" aria-label="Flag question 23">&#9873;</button></div>
+          <label class="mcq-opt" data-q="23"><input type="radio" name="q23" value="A"> delighted</label>
+          <label class="mcq-opt" data-q="23"><input type="radio" name="q23" value="B"> dissatisfied</label>
+          <label class="mcq-opt" data-q="23"><input type="radio" name="q23" value="C"> embarrassed</label>
+        </div>
+
+        <div class="mcq-block">
+          <div class="stem-row"><span class="qn-badge" id="badge-24">24</span><p>How does Spiros feel about his performance in tutorials?</p><button class="flag-btn" data-flag="24" aria-label="Flag question 24">&#9873;</button></div>
+          <label class="mcq-opt" data-q="24"><input type="radio" name="q24" value="A"> not very happy</label>
+          <label class="mcq-opt" data-q="24"><input type="radio" name="q24" value="B"> really pleased</label>
+          <label class="mcq-opt" data-q="24"><input type="radio" name="q24" value="C"> fairly confident</label>
+        </div>
+
+        <div class="mcq-block">
+          <div class="stem-row"><span class="qn-badge" id="badge-25">25</span><p>Why can the other students participate so easily in discussions?</p><button class="flag-btn" data-flag="25" aria-label="Flag question 25">&#9873;</button></div>
+          <label class="mcq-opt" data-q="25"><input type="radio" name="q25" value="A"> They are polite to each other</label>
+          <label class="mcq-opt" data-q="25"><input type="radio" name="q25" value="B"> They agree to take turns in speaking</label>
+          <label class="mcq-opt" data-q="25"><input type="radio" name="q25" value="C"> They know each other well</label>
+        </div>
+
+        <div class="mcq-block">
+          <div class="stem-row"><span class="qn-badge" id="badge-26">26</span><p>Why is Hiroko feeling more positive about tutorials now?</p><button class="flag-btn" data-flag="26" aria-label="Flag question 26">&#9873;</button></div>
+          <label class="mcq-opt" data-q="26"><input type="radio" name="q26" value="A"> She finds the other students' opinions more interesting</label>
+          <label class="mcq-opt" data-q="26"><input type="radio" name="q26" value="B"> She is making more of a contribution</label>
+          <label class="mcq-opt" data-q="26"><input type="radio" name="q26" value="C"> The tutor includes her in the discussion</label>
+        </div>
+
+        <div class="mcq-block">
+          <div class="stem-row"><span class="qn-badge" id="badge-27">27</span><p>To help her understand lectures, Hiroko</p><button class="flag-btn" data-flag="27" aria-label="Flag question 27">&#9873;</button></div>
+          <label class="mcq-opt" data-q="27"><input type="radio" name="q27" value="A"> consulted reference materials</label>
+          <label class="mcq-opt" data-q="27"><input type="radio" name="q27" value="B"> had extra tutorials with her lecturers</label>
+          <label class="mcq-opt" data-q="27"><input type="radio" name="q27" value="C"> borrowed lecture notes from other students</label>
+        </div>
+
+        <div class="mcq-block">
+          <div class="stem-row"><span class="qn-badge" id="badge-28">28</span><p>What does Spiros think of his reading skills?</p><button class="flag-btn" data-flag="28" aria-label="Flag question 28">&#9873;</button></div>
+          <label class="mcq-opt" data-q="28"><input type="radio" name="q28" value="A"> He reads faster than he used to</label>
+          <label class="mcq-opt" data-q="28"><input type="radio" name="q28" value="B"> It still takes him a long time to read</label>
+          <label class="mcq-opt" data-q="28"><input type="radio" name="q28" value="C"> He tends to struggle with new vocabulary</label>
+        </div>
+
+        <div class="mcq-block">
+          <div class="stem-row"><span class="qn-badge" id="badge-29">29</span><p>What is Hiroko's subject area?</p><button class="flag-btn" data-flag="29" aria-label="Flag question 29">&#9873;</button></div>
+          <label class="mcq-opt" data-q="29"><input type="radio" name="q29" value="A"> environmental studies</label>
+          <label class="mcq-opt" data-q="29"><input type="radio" name="q29" value="B"> health education</label>
+          <label class="mcq-opt" data-q="29"><input type="radio" name="q29" value="C"> engineering</label>
+        </div>
+
+        <div class="mcq-block">
+          <div class="stem-row"><span class="qn-badge" id="badge-30">30</span><p>Hiroko thinks that in the reading classes the students should</p><button class="flag-btn" data-flag="30" aria-label="Flag question 30">&#9873;</button></div>
+          <label class="mcq-opt" data-q="30"><input type="radio" name="q30" value="A"> learn more vocabulary</label>
+          <label class="mcq-opt" data-q="30"><input type="radio" name="q30" value="B"> read more in their own subject areas</label>
+          <label class="mcq-opt" data-q="30"><input type="radio" name="q30" value="C"> develop better reading strategies</label>
+        </div>
+      </section>
+
+      <!-- PART 4 -->
+      <section class="part-panel" data-part="4">
+        <div class="instr-box"><span class="pt">Questions 31–40</span>Complete the notes below. Write NO MORE THAN THREE WORDS.</div>
+        <h2 class="q-title">Mass Strandings of Whales and Dolphins</h2>
+        <div class="notes-block">
+          <b>Mass strandings:</b> situations where groups of whales, dolphins, etc. swim onto the beach and die<br><br>
+          · Common in areas where the
+          <span class="blank-wrap"><span class="qn-badge" id="badge-31">31</span><input class="ans" data-q="31" type="text"><button class="flag-btn" data-flag="31" aria-label="Flag question 31">&#9873;</button></span>
+          can change quickly<br><br>
+          <b>Several other theories:</b><br>
+          <b>Parasites</b><br>
+          · Some parasites can affect marine animals'
+          <span class="blank-wrap"><span class="qn-badge" id="badge-32">32</span><input class="ans" data-q="32" type="text"><button class="flag-btn" data-flag="32" aria-label="Flag question 32">&#9873;</button></span>,
+          which they depend on for navigation<br><br>
+          <b>Toxins</b><br>
+          · Poisons from
+          <span class="blank-wrap"><span class="qn-badge" id="badge-33">33</span><input class="ans" data-q="33" type="text"><button class="flag-btn" data-flag="33" aria-label="Flag question 33">&#9873;</button></span>
+          or are commonly consumed by whales<br>
+          · Cape Cod (1988) – whales were killed by saxitoxin<br><br>
+          <b>Accidental Strandings</b><br>
+          · Animals may follow prey ashore, e.g. Thurston (1995)<br>
+          · Unlikely because the majority of animals were not
+          <span class="blank-wrap"><span class="qn-badge" id="badge-34">34</span><input class="ans" data-q="34" type="text"><button class="flag-btn" data-flag="34" aria-label="Flag question 34">&#9873;</button></span>
+          when they stranded<br><br>
+          <b>Human Activity</b><br>
+          ·
+          <span class="blank-wrap"><span class="qn-badge" id="badge-35">35</span><input class="ans" data-q="35" type="text"><button class="flag-btn" data-flag="35" aria-label="Flag question 35">&#9873;</button></span>
+          from military tests are linked to some recent strandings<br>
+          · The Bahamas (2000) stranding was unusual because the whales<br>
+          &nbsp;&nbsp;• were all
+          <span class="blank-wrap"><span class="qn-badge" id="badge-36">36</span><input class="ans" data-q="36" type="text"><button class="flag-btn" data-flag="36" aria-label="Flag question 36">&#9873;</button></span><br>
+          &nbsp;&nbsp;• were not in a
+          <span class="blank-wrap"><span class="qn-badge" id="badge-37">37</span><input class="ans" data-q="37" type="text"><button class="flag-btn" data-flag="37" aria-label="Flag question 37">&#9873;</button></span><br><br>
+          <b>Group Behaviour</b><br>
+          · More strandings in the most
+          <span class="blank-wrap"><span class="qn-badge" id="badge-38">38</span><input class="ans" data-q="38" type="text"><button class="flag-btn" data-flag="38" aria-label="Flag question 38">&#9873;</button></span>
+          species of whales<br>
+          · 1994 dolphin stranding – only the
+          <span class="blank-wrap"><span class="qn-badge" id="badge-39">39</span><input class="ans" data-q="39" type="text"><button class="flag-btn" data-flag="39" aria-label="Flag question 39">&#9873;</button></span>
+          was ill<br><br>
+          <b>Further Reading</b><br>
+          Marine Mammals Ashore (Connor) – gives information about stranding
+          <span class="blank-wrap"><span class="qn-badge" id="badge-40">40</span><input class="ans" data-q="40" type="text"><button class="flag-btn" data-flag="40" aria-label="Flag question 40">&#9873;</button></span>
+        </div>
+      </section>
+    </main>
+
+    <aside class="palette">
+      <div class="palette-box">
+        <h3>Question palette</h3>
+        <div id="palette-parts"></div>
+        <div class="palette-legend">
+          <div class="li"><span class="sw a"></span> Answered</div>
+          <div class="li"><span class="sw f"></span> Flagged</div>
+        </div>
+        <button class="review-jump" id="palette-review-btn">Go to review</button>
+      </div>
+    </aside>
+  </div>
+
+  <div class="ctrl-bar">
+    <div class="ctrl-inner">
+      <button class="nav-btn" id="prev-part-btn">&larr; Previous part</button>
+      <span class="ctrl-mid" id="ctrl-progress">0 / 40 answered</span>
+      <div style="display:flex; gap:10px;">
+        <button class="nav-btn" id="next-part-btn">Next part &rarr;</button>
+        <button class="btn-review" id="go-review-btn">Review &amp; submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== REVIEW SCREEN ===================== -->
+<div id="review-screen" class="hidden">
+  <div class="review-head">
+    <div class="review-head-inner">
+      <span class="brand-mark"><img src="../../../../assets/buye-mark-64.png" alt="" style="width:20px;height:20px;"></span>
+      <h1>Review your answers</h1>
+    </div>
+  </div>
+  <div class="review-body">
+    <div class="review-summary">
+      <div><div class="n" id="rv-answered">0 / 40</div><div class="l">Answered</div></div>
+      <div><div class="n" id="rv-unanswered">40</div><div class="l">Not answered</div></div>
+      <div><div class="n" id="rv-flagged">0</div><div class="l">Flagged for review</div></div>
+      <div><div class="n" id="rv-time">30:00</div><div class="l">Time remaining</div></div>
+    </div>
+
+    <div class="review-grid-wrap">
+      <h3>All questions — click any number to go back to it</h3>
+      <div class="review-grid" id="review-grid"></div>
+    </div>
+
+    <div class="review-actions">
+      <button class="btn-back" id="review-back-btn">Back to test</button>
+      <button class="btn-submit-final" id="review-submit-btn">Submit test</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== RESULTS SCREEN ===================== -->
+<div id="results-screen" class="hidden">
+  <div class="rw">
+    <div class="brand"><span class="brand-mark"><img src="../../../../assets/buye-mark-160.png" alt="" style="width:22px;height:22px;"></span><span>BUYE-Online — IELTS Listening Test 3 results</span></div>
+
+    <div class="score-hero">
+      <div class="band"><div class="n" id="band-score">–</div><div class="l">ESTIMATED BAND</div></div>
+      <div class="raw"><div class="n" id="raw-score">0 / 40</div><div class="l">correct, converted using the standard IELTS Listening band table</div></div>
+    </div>
+
+    <div class="part-scores" id="part-scores"></div>
+
+    <h3 style="font-size:14px; margin:0 0 10px;">Answer review</h3>
+    <table class="review-table">
+      <thead><tr><th></th><th>Q</th><th>Your answer</th><th>Correct answer</th></tr></thead>
+      <tbody id="review-body"></tbody>
+    </table>
+
+    <div class="results-actions">
+      <button class="btn-primary2" id="retake-btn">Retake test</button>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+  window.TEST_DATA = {
+    testId: "test-3",
+    title: "IELTS Listening — Computer-Delivered Test 3",
+    audioSrc: "audio.mp3",
+    totalQuestions: 40,
+    partBoundaries: [10, 20, 30, 40],
+    partLabels: {
+      1: "Part 1 — Job Inquiry",
+      2: "Part 2 — Sports World",
+      3: "Part 3 — Course Feedback",
+      4: "Part 4 — Mass Strandings"
+    }
+  };
+</script>
+<script src="../../../../shared/theme-toggle.js"></script>
+<script src="../../../../shared/api.js"></script>
+<script src="../../../../shared/auth-gate.js"></script>
+<script src="../../engine/exam-engine.js"></script>
+</body>
+</html>
+
+
+
+
